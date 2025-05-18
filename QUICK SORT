@@ -1,0 +1,44 @@
+class Main {
+    public static void main(String[] args) {
+        int[] numbers = {5,7,2,9};
+        
+        int left = 0;
+        int right = numbers.length-1;
+        int pivot = numbers.length/2;
+        Main root = new Main();
+        root.quickSort(numbers, left, right);
+        
+        for(int i=0;i<numbers.length;i++){
+            System.out.println(numbers[i]);
+        }
+    }
+    
+    public void quickSort(int[] numbers, int left, int right){
+        if(left>=right){
+            return;
+        }
+        int start = left;
+        int pivot = left + (right-left)/2;
+        int pivotNumber = numbers[pivot];
+        
+        for(int i=left;i<=right;i++){
+            if(numbers[i]<pivotNumber){
+                swap(numbers, i, left);
+                left+=1;
+                if(left-1==pivot){
+                    pivot = i;
+                }
+            }
+        }
+        
+        swap(numbers, left, pivot);
+        quickSort(numbers, start, left-1);
+        quickSort(numbers, left+1, right);
+    }
+    
+    public void swap(int[] numbers, int i, int j){
+        int temp = numbers[i];
+        numbers[i]=numbers[j];
+        numbers[j] = temp;
+    }
+}
